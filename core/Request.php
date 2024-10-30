@@ -10,8 +10,7 @@ class Request
 
     public function __construct($uri)
     {
-        $this->uri = trim(urldecode($uri), '/');
-        dump($this->uri);
+        $this->uri = trim(urldecode($uri), '/');       
     }
 
     public function getMethod(): string
