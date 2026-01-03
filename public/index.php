@@ -8,7 +8,11 @@ $start_frame = microtime(true);
 
 $app = new \SimpleFramework\Application();
 
-dump($app);
+require_once CONFIG . '/routes.php';
+
+$app->run();
+
+/*dump($app);
 dump(request()->uri);
 dump(request()->getMethod());
 dump(request()->isPost());
@@ -16,7 +20,7 @@ dump(request()->isGet());
 
 dump(request()->get('age'));
 dump(request()->get('name'));
-dump(request()->post('name'));
+dump(request()->post('name'));*/
 
 if(PHP_MAJOR_VERSION < 8)
 {
