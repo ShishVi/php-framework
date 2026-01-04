@@ -5,8 +5,9 @@ namespace App\Controllers;
 class HomeController
 {
 
-    public function test():string
+    public function index()
     {
-        return "This test method";
+        return view('home', ['product' => 'apple', 'store' => 'LabNew555']);
+
     }
 }

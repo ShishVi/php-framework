@@ -52,9 +52,7 @@ class Router
         $path = $this->request->getPath();
         $route =  $this->matchRoute($path);
         if(!$route){
-            $this->response->setResponseCode(404);
-            echo "404-Page not found";
-            die();
+            abort();
         }
 
         if(is_array($route['callback']) && isset($route['callback'][0])){
