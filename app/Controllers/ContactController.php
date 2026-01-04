@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 class ContactController
 {
-    public function index():void
+    public function index():string
     {
-        echo "Contact";
+        return "Contact";
     }
 }

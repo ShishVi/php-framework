@@ -39,6 +39,21 @@ class Request
         return $_POST[$name] ?? $default;
     }
 
+    public function getPath():string
+    {
+        return $this->removeQueryString();
+    }
+
+    protected function removeQueryString():string
+    {
+        if($this->uri){
+            $params = explode('?', $this->uri);
+            return trim($params[0], "/");
+        }else{
+            return "";
+        }
+    }
+
 
 
 }

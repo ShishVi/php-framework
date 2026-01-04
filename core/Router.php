@@ -6,9 +6,9 @@ class Router
 {
     protected array $routes = [];
 
-    protected array $routes_params = [];
+    protected array $route_params = [];
 
-    public function __construct(Request $request, Response $response)
+    public function __construct(protected Request $request, protected Response $response)
     {
     }
 
@@ -26,7 +26,8 @@ class Router
             'path' => "/$path",
             'callback' => $callback,
             'middleware' => null,
-            'method' => $method
+            'method' => is_array($method) ? $method : [$method],
+            'csrFToken' => true,
         ];
 
         return $this;
@@ -48,7 +49,41 @@ class Router
 
     public function dispatch():mixed
     {
-        return "TEST";
+        $path = $this->request->getPath();
+        $route =  $this->matchRoute($path);
+        if(!$route){
+            $this->response->setResponseCode(404);
+            echo "404-Page not found";
+            die();
+        }
+
+        if(is_array($route['callback']) && isset($route['callback'][0])){
+            $route['callback'][0] = new $route['callback'][0];
+        }
+        dump($route);
+        return call_user_func($route['callback']);
+
+
+    }
+
+    protected function matchRoute($path):mixed
+    {
+        foreach($this->routes as $route){
+            if(preg_match("#^{$route['path']}$#", "/{$path}", $matches)
+            && in_array($this->request->getMethod(), $route['method']??[])
+            ){
+
+                foreach ($matches as $k=>$v)
+                {
+                    if(is_string($k)){
+                        $this->route_params[$k] = $v;
+                    }
+                }
+
+                return $route;
+            }
+        }
+        return false;
     }
 
 }
