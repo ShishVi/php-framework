@@ -2,6 +2,7 @@
 
 define("ROOT", dirname(__DIR__));
 
+const WWW = ROOT ."/public";
 const CONFIG = ROOT . '/config';
 const HELPERS = ROOT . '/helpers';
 

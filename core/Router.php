@@ -57,11 +57,10 @@ class Router
 
         if(is_array($route['callback']) && isset($route['callback'][0])){
             $route['callback'][0] = new $route['callback'][0];
+            return call_user_func($route['callback']);
         }
-        dump($route);
-        return call_user_func($route['callback']);
-
-
+        abort();
+        return false;
     }
 
     protected function matchRoute($path):mixed

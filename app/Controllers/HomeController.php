@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
-class HomeController
+class HomeController extends BaseController
 {
 
     public function index()
     {
-        return view('home', ['product' => 'apple', 'store' => 'LabNew555']);
+        return view('home', ['title' => 'Home Page']);
 
     }
 }

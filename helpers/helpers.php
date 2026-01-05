@@ -27,7 +27,7 @@ function view($view='', $data=[], $layout = ''):string|\SimpleFramework\View
 function abort($error = '', $code = 404)
 {
     response()->setResponseCode($code);
-    echo view("errors/{$code}", ['error' => $error], false);
+    echo view("errors/{$code}", ['error' => $error], LAYOUT);
     die();
 }
 

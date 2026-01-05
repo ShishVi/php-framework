@@ -3,11 +3,14 @@
 /** @var \SimpleFramework\Application $app*/
 
 
-$app->router->get('/', [\App\Controllers\HomeController::class, 'index']);
+use App\Controllers\HomeController;
+use App\Controllers\UserController;
 
-/*$app->router->get('/test', [\App\Controllers\HomeController::class, 'test']);
-$app->router->post('/contact', [\App\Controllers\ContactController::class, 'index']);
-$app->router->get('/contact', [\App\Controllers\ContactController::class, 'index']);*/
+$app->router->get('/', [HomeController::class, 'index']);
+
+$app->router->get('register', [UserController::class, 'register']);
+$app->router->post('register', [UserController::class, 'store']);
+$app->router->get('login', [UserController::class, 'login']);
 
 $app->router->get('/catalog/(?P<slug>[a-z0-9-]+)/?', function(){
     return '<p>Some product</p>';

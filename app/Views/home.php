@@ -1,2 +1,4 @@
-<h1>Home page <?=$store?></h1>
-<p><?=$product?></p>
+<div class="container">
+    <h1><?=$title?></h1>
+</div>
+

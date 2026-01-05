@@ -54,6 +54,21 @@ class Request
         }
     }
 
+    public function getData():array
+    {
+        $data = [];
+        $request_data = $this->isPost() ? $_POST : $_GET;
+
+        foreach($request_data as $key => $value){
+            if(is_string($value)){
+                $value = trim($value);
+            }
+            $data[$key] = $value;
+        }
+
+        return $data;
+    }
+
 
 
 }
