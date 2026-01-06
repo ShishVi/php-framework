@@ -40,4 +40,18 @@ class View
         }
         return'';
     }
+    public function renderPartial($view, $data=[]):string
+    {
+        extract($data);
+        $view_file = VIEWS ."/{$view}.php";
+
+        if(is_file($view_file)){
+            ob_start();
+            require $view_file;
+            return ob_get_clean();
+
+        }else{
+            return "File {$view_file} not found!";
+        }
+    }
 }

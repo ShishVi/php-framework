@@ -31,6 +31,7 @@
         </div>
     </div>
 </nav>
+<?=get_alerts()?>
 <?=$this->content?>
 
 <script src="<?=base_url('/assets/jquery-2.1.1.min.js');?>"></script>

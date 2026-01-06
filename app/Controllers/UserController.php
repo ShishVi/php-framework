@@ -16,14 +16,25 @@ class UserController extends BaseController
       $model = new User();
       $model->loadData();
       $data = $model->attributes;
-      dump($model->validate());
-      dump($model->getErrors());
-      dump($data);
-      dump($_POST);
+      if(!$model->validate())
+      {
+          session()->setFlash("error","Validation errors!");
+          session()->set("form_errors", $model->getErrors());
+          session()->set("form_data", $model->attributes);
+
+      }else{
+          session()->setFlash("success","Successful validation!");
+      }
+
+
+      redirect("/register");
+
    }
 
    public function login():void
    {
        view('user/login', ['title'=> "Login"]);
    }
+
+
 }
