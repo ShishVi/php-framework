@@ -1,12 +1,13 @@
 <div class="container">
-   <!-- --><?php
-/*    dump(session()->get("form_errors"));
-    dump(session()->get("form_data"));
-    */?>
+   <?php
+   /* dump(session()->get("csrf_token"));*/
+
+    ?>
     <h1><?=$title ?? 'Register page'?></h1>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form action="<?=base_url('/register')?>" method="post">
+                <?=get_csrf_field()?>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input name="name" type="text" class="form-control <?=get_validation_class('name')?>" id="name" placeholder="Your Name" value="<?=old('name')?>">

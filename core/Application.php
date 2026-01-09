@@ -26,12 +26,22 @@ class Application
         $this->router = new Router($this->request, $this->response);
         $this->view = new View(LAYOUT);
         $this->session = new Session();
+        $this->generateCsrfToken();
+
 
     }
 
     public function run():void
     {
         echo $this->router->dispatch();
+    }
+
+    public function generateCsrfToken():void
+    {
+        if(!$this->session->has('csrf_token'))
+        {
+            $this->session->set('csrf_token', md5(uniqid(mt_rand(), true)));
+        }
     }
 
 }
