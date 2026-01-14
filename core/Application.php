@@ -1,6 +1,8 @@
 <?php
 
 namespace SimpleFramework;
+use Illuminate\Database\Capsule\Manager as Capsule;
+
 class Application
 {
     protected string $uri;
@@ -27,8 +29,7 @@ class Application
         $this->view = new View(LAYOUT);
         $this->session = new Session();
         $this->generateCsrfToken();
-
-
+        $this->setDBConnection();
     }
 
     public function run():void
@@ -42,6 +43,14 @@ class Application
         {
             $this->session->set('csrf_token', md5(uniqid(mt_rand(), true)));
         }
+    }
+
+    public function setDBConnection():void
+    {
+        $capsule = new Capsule();
+        $capsule->addConnection(DB_CONFIG);
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
     }
 
 }
